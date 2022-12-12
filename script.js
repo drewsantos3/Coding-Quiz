@@ -5,32 +5,83 @@ let time = 0;
 let currentScore = 0;
 let start = document.querySelector('#startBtn');
 let score = JSON.parse(localStorage.getItem("score")) || [];
-let questions = document.querySelector("#questions");
+let questions = document.querySelector("#quiz");
 let questionIndex = 0;
-let quesOne = {
+let quiz = [
+    {
     question: "Which of the following do you loop through in Javascript?",
     answers: ["object", "function", "array", "element"],
-    correctAnswer: "array"
-};
-let quesTwo = {
+    correctAnswer: "array",
+},
+{
     question: "What data type is this value? value: 500",
     answers: ["boolean", "string", "undefined", "integer"],
-    correctAnswer: "integer"
-};
-let quesThree = {
+    correctAnswer: "integer",
+},
+{
     question: "What is the correct syntax for displaying data in the console?",
     answers: ["console.log()", "console.log{}", "log.console()", "consolelog()"],
-    correctAnswer: "console.log()"   
-};
-let quesFour = {
+    correctAnswer: "console.log()",   
+},
+{
     question: "Which of the following defines an object in javascript?",
     answers: ["An object is a variable.", "An object is a container for named values called properties.", "An object is a function.", "An object is a fruit."],
     correctAnswer: "An object is a container for named values called properties."
-};
+},
+];
 
 
 // functions
-// timer
+// first question
+function firstQuestion() {
+let question = document.createElement("h2");
+question.textContent = quiz[questionIndex].question;
+questions.appendChild(question);
+
+// create buttons and append to questions div
+let btnOne = document.createElement("button");
+btnOne.textContent = quiz[questionIndex].answers[0];
+questions.appendChild(btnOne);
+
+let btnTwo = document.createElement("button");
+btnTwo.textContent = quiz[questionIndex].answers[1];
+questions.appendChild(btnTwo);
+
+let btnThree = document.createElement("button");
+btnThree.textContent = quiz[questionIndex].answers[2];
+questions.appendChild(btnThree);
+
+let btnFour = document.createElement("button")
+btnFour.textContent = quiz[questionIndex].answers[3];
+questions.appendChild(btnFour);
+};
+
+function clearPrevious() {};
+
+function nextQuestion() {
+
+}
+// function to compare user answer to correct answer
+
+function userChoice() {
+    if (this.textContent === quiz[questionIndex].correctAnswer) {
+        questionIndex++;
+        score++;
+    if (questionIndex === quiz.length) {
+        alert("You fail.");
+        clearInterval(time); 
+    }   else {
+        let incorrect = document.createElement(h3);
+        incorrect.textContent = "Wrong Answer."
+        questions.appendChild(incorrect)
+        questions.innerHTML = '';
+        nextQuestion();
+    }
+
+    }
+}
+
+// timer function
 function startBtn() {
     questionIndex = 0;
     questions.innerHTML = "";
@@ -38,39 +89,6 @@ function startBtn() {
         timeLeft--, timer.innerHTML = timeLeft;
     }, 1000);
 };
-// first question
-let question = document.createElement("h2");
-question.textContent = quesOne.question;
-questions.appendChild(question);
-
-// create buttons and append to questions div
-let btnOne = document.createElement("button");
-btnOne.textContent = quesOne.answers[0];
-btnOne.textContent = quesOne.answers[1];
-btnOne.textContent = quesOne.answers[2];
-btnOne.textContent = quesOne.answers[3];
-questions.appendChild(btnOne);
-
-let btnTwo = document.createElement("button");
-btnTwo.textContent = quesTwo.answers[0];
-btnTwo.textContent = quesTwo.answers[1];
-btnTwo.textContent = quesTwo.answers[2];
-btnTwo.textContent = quesTwo.answers[3];
-questions.appendChild(btnTwo);
-
-let btnThree = document.createElement("button");
-btnThree.textContent = quesThree.answers[0];
-btnThree.textContent = quesThree.answers[1];
-btnThree.textContent = quesThree.answers[2];
-btnThree.textContent = quesThree.answers[3];
-questions.appendChild(btnThree);
-
-let btnFour = document.createElement("button")
-btnFour.textContent = quesFour.answers[0];
-btnFour.textContent = quesFour.answers[1];
-btnFour.textContent = quesFour.answers[2];
-btnFour.textContent = quesFour.answers[3];
-questions.appendChild(btnFour);
 
 // event listeners
 start.addEventListener("click", startBtn)
