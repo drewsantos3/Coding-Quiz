@@ -90,6 +90,49 @@ function startBtn() {
     }, 1000);
 };
 
+// function to save score to local storage
+function saveScore() {
+    localStorage.setItem("score", JSON.stringify(score));
+}
+
+// function to display high scores
+function highScore() {
+    let highScore = document.createElement("h2");
+    highScore.textContent = "High Scores";
+    questions.appendChild(highScore);
+    let scoreList = document.createElement("ol");
+    questions.appendChild(scoreList);
+    for (let i = 0; i < score.length; i++) {
+        let scoreItem = document.createElement("li");
+        scoreItem.textContent = score[i];
+        scoreList.appendChild(scoreItem);
+    }
+}
+
+// function to clear high scores
+function clearScore() {
+    localStorage.clear();
+    questions.innerHTML = "";
+}
+
+// function to restart quiz
+function restart() {
+    questions.innerHTML = "";
+    timeLeft = 60;
+    timer.innerHTML = timeLeft;
+    questionIndex = 0;
+    score = 0;
+    startBtn();
+    firstQuestion();
+}
+
 // event listeners
 start.addEventListener("click", startBtn)
-btnOne.addEventListener("click", )
+btnOne.addEventListener("click", userChoice); 
+btnTwo.addEventListener("click", userChoice);
+btnThree.addEventListener("click", userChoice);
+btnFour.addEventListener("click", userChoice);
+
+
+
+
