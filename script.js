@@ -1,3 +1,4 @@
+// global variables
 let time = 30;
 let timer = 0;
 let score = 0;
@@ -34,6 +35,7 @@ let quiz = [
 
 
 // functions
+// start quiz function
 function startQuiz() {
     timer = setInterval(function () {
         time--;
@@ -43,6 +45,7 @@ function startQuiz() {
             endGame();
         }
     }, 1000);
+    // hide intro div 
     intro.classList.add("hidden");
     createButton(questionsIndex);
 }
@@ -64,6 +67,7 @@ function createButton(index) {
     });
 }
 
+// end game function and save score input
 function endGame() {
     questionDiv.innerHTML = "";
     let endGameDiv = document.createElement("div");
@@ -110,6 +114,7 @@ function checkAnswer(event) {
   }
 }
 
+// save score function and local storage
 function saveScore(event) {
   event.preventDefault();
   let initials = document.querySelector("#initialsInput").value;
